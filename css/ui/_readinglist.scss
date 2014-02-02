@@ -1,0 +1,57 @@
+.readinglist_header {
+	background-color: #0686B7;
+	height: 60px;
+	width:100%;
+	padding: 0 15px;
+	h1 {
+		font-size: 26px;
+		font-weight: 200;
+		color: #fff;
+		line-height: 60px;
+	}
+}
+
+
+.reading_list {
+	background-color:#fff;
+	.add {
+		padding: 15px;
+		form {
+			input[type="url"]{
+				width:90%;
+			}
+			input[type="submit"]{
+
+			}
+		}
+	}
+	ul {
+		margin: 0;
+		padding: 20px 15px;
+		li {
+			margin: 0;
+			padding: 15px 0;
+			border-top: 1px solid #eee;
+			list-style: none;
+			h3 {
+				line-height: 1.4em;
+				margin: 0;
+				word-wrap: normal;
+				a {
+					color: #000;
+				}
+			}
+			p {
+				font-size: 9pt;
+				margin: 0;
+				word-wrap: break-word;
+			}
+			.link {
+				margin: 0 0 7px 0;
+			}
+		}
+	}
+	.key {
+		padding: 0 15px;
+	}
+}
