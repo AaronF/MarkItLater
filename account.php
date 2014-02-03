@@ -3,8 +3,7 @@ require_once('models/config.php');
 if(!isUserLoggedIn()) { header('Location: login.php'); die(); }
 
 
-if(isset($_POST["changeprofilesubmit"]))
-{
+if(isset($_POST["changeprofilesubmit"])){
 	$profileerrors_first = array();
 	$profileerrors_last = array();
 	$profileerrors_phone = array();
