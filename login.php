@@ -7,7 +7,11 @@
 		$errors = array();
 		$email = trim($_POST["email"]);
 		$password = trim($_POST["password"]);
-		$remember_choice = trim($_POST["remember_me"]);
+		if(isset($_POST["remember_me"])){
+			$remember_choice = trim($_POST["remember_me"]);
+		} else {
+			$remember_choice = 0;
+		}
 
 		if($email == ""){
 			$errors[] = lang("ACCOUNT_SPECIFY_USERNAME");
@@ -32,20 +36,18 @@
 						$loggedInUser->email = $userdetails["Email"];
 						$loggedInUser->user_id = $userdetails["User_ID"];
 						$loggedInUser->hash_pw = $userdetails["Password"];
-						// $loggedInUser->display_username = $userdetails["Username"];
-						// $loggedInUser->clean_username = $userdetails["Username_Clean"];
 						$loggedInUser->remember_me = $remember_choice;
-						$loggedInUser->remember_me_sessid = rand_string( 15 );
+						$loggedInUser->remember_me_sessid = rand_string(15);
 						$loggedInUser->user_key = $userdetails["User_Key"];
 			
 						$loggedInUser->updateLastSignIn();
-		
+
 						if($loggedInUser->remember_me == 0) {
-							$_SESSION["Template"] = $loggedInUser;
+							$_SESSION["rl"] = $loggedInUser;
 						} else if($loggedInUser->remember_me == 1) {
-							// $_SESSION["farelert"] = $loggedInUser;
+							$_SESSION["rl"] = $loggedInUser;
 							$db->sql_query("INSERT INTO ".$db_table_prefix."Sessions VALUES('".time()."', '".serialize($loggedInUser)."', '".$loggedInUser->remember_me_sessid."')");
-							setcookie("TemplateUser", $loggedInUser->remember_me_sessid, time()+parseLength($remember_me_length));
+							setcookie("reading_list", $loggedInUser->remember_me_sessid, time()+parseLength($remember_me_length));
 						}
 						
 						header("Location: reading_list.php");
@@ -68,11 +70,8 @@
 	<meta name="keywords" content="">
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
 
-    <link rel="stylesheet" href="css/external/gridiculous.css">
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/external/typeahead.css">
     <link rel="stylesheet" href="css/external/font-awesome.css">
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
     <title><?php echo $websiteName;?> - Login</title>
@@ -107,6 +106,5 @@
 	</div>
 </div>
 
-<script src="js/jquery.validate.min.js"></script>
 </body>
 </html>

@@ -18,10 +18,18 @@
 		padding: 15px;
 		form {
 			input[type="url"]{
-				width:90%;
+				width:100%;
 			}
 			input[type="submit"]{
 
+			}
+		}
+		#add_loader {
+			text-align: center;
+			i {
+				text-align: center;
+				font-size: 26px;
+				margin: 10px 0 0 0;
 			}
 		}
 	}
@@ -34,12 +42,15 @@
 			border-top: 1px solid #eee;
 			list-style: none;
 			word-wrap: break-word;
-			h3 {
+			h4 {
 				line-height: 1.4em;
 				margin: 0;
 				word-wrap: normal;
 				a {
 					color: #000;
+					&:visited {
+						color: #000;
+					}
 				}
 			}
 			p {

@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: 127.0.0.1 (MySQL 5.5.33)
-# Database: templatesql
-# Generation Time: 2013-12-06 23:35:26 +0000
+# Host: localhost (MySQL 5.5.33)
+# Database: thetechb_rl
+# Generation Time: 2014-02-06 10:24:23 +0000
 # ************************************************************
 
 
@@ -31,15 +31,6 @@ CREATE TABLE `Member_Groups` (
   PRIMARY KEY (`Group_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-LOCK TABLES `Member_Groups` WRITE;
-/*!40000 ALTER TABLE `Member_Groups` DISABLE KEYS */;
-
-INSERT INTO `Member_Groups` (`Group_ID`, `Group_Name`)
-VALUES
-	(1,'Standard User');
-
-/*!40000 ALTER TABLE `Member_Groups` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table Member_Sessions
@@ -74,19 +65,27 @@ CREATE TABLE `Member_Users` (
   `LastSignIn` int(11) NOT NULL,
   `Private` int(1) DEFAULT '0',
   `Newsletter` int(1) DEFAULT '1',
-  `Unique` varchar(20) DEFAULT '0',
+  `User_Key` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`User_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-LOCK TABLES `Member_Users` WRITE;
-/*!40000 ALTER TABLE `Member_Users` DISABLE KEYS */;
 
-INSERT INTO `Member_Users` (`User_ID`, `Email`, `Password`, `ActivationToken`, `LastActivationRequest`, `LostPasswordRequest`, `Active`, `Group_ID`, `SignUpDate`, `LastSignIn`, `Private`, `Newsletter`, `Unique`)
-VALUES
-	(1,'aaronfisher@me.com','$2a$13$BjpnioYK833L56ZI.BxMve9E/58iFs64dj/Q.xBY1hpKAQugPwt72','b1daab23057213f81251e3689d379b02',1375475375,0,1,1,1375475375,1386372821,0,1,'0');
 
-/*!40000 ALTER TABLE `Member_Users` ENABLE KEYS */;
-UNLOCK TABLES;
+# Dump of table Reading_List
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `Reading_List`;
+
+CREATE TABLE `Reading_List` (
+  `Item_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) NOT NULL,
+  `Item_Order` int(11) DEFAULT '0',
+  `Item_Title` varchar(250) NOT NULL DEFAULT '',
+  `Item_Link` varchar(300) NOT NULL DEFAULT '',
+  `Date_Time` varchar(40) NOT NULL DEFAULT '',
+  PRIMARY KEY (`Item_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 

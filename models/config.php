@@ -38,10 +38,10 @@
 
 	session_start();
 	
-	if(isset($_SESSION["Template"]) && is_object($_SESSION["Template"])) {
-		$loggedInUser = $_SESSION["Template"];
-	} else if(isset($_COOKIE["TemplateUser"])) {
-		$db->sql_query("SELECT sessionData FROM ".$db_table_prefix."Sessions WHERE sessionID = '".$_COOKIE['TemplateUser']."'");
+	if(isset($_SESSION["rl"]) && is_object($_SESSION["rl"])) {
+		$loggedInUser = $_SESSION["rl"];
+	} else if(isset($_COOKIE["reading_list"])) {
+		$db->sql_query("SELECT sessionData FROM ".$db_table_prefix."Sessions WHERE sessionID = '".$_COOKIE['reading_list']."'");
 		$dbRes = $db->sql_fetchrowset();
 		if(empty($dbRes)) {
 			$loggedInUser = NULL;

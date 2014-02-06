@@ -170,7 +170,10 @@ function emailUsernameLinked($email,$username) {
 function isUserLoggedIn() {
 	global $loggedInUser,$db,$db_table_prefix;
 	
-	$sql = "SELECT User_ID,
+	if($loggedInUser == NULL){
+		return false;
+	} else {
+		$sql = "SELECT User_ID,
 			Password
 			FROM ".$db_table_prefix."Users
 			WHERE
@@ -180,23 +183,12 @@ function isUserLoggedIn() {
 			AND
 			Active = 1
 			LIMIT 1";
-	
-	if($loggedInUser == NULL)
-	{
-		return false;
-	}
-	else
-	{
 		//Query the database to ensure they haven't been removed or possibly banned?
-		if(returns_result($sql) > 0)
-		{
+		if(returns_result($sql) > 0){
 				return true;
-		}
-		else
-		{
+		} else {
 			//No result returned kill the user session, user banned or deleted
 			$loggedInUser->userLogOut();
-		
 			return false;
 		}
 	}

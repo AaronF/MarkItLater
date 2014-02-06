@@ -4,8 +4,6 @@ class loggedInUser {
 	public $email = NULL;
 	public $hash_pw = NULL;
 	public $user_id = NULL;
-	public $clean_username = NULL;
-	public $display_username = NULL;
 	public $remember_me = NULL;
 	public $remember_me_sessid = NULL;
 	
@@ -63,13 +61,13 @@ updateSessionObj();
 	}
 	
 	//Update a users email
-	public function updateEmail($email)
-	{
+	public function updateEmail($email){
 		global $db,$db_table_prefix;
 		
 		$this->email = $email;
-if($this->remember_me == 1)
-updateSessionObj();
+		if($this->remember_me == 1) {
+			updateSessionObj();
+		}
 		
 		$sql = "UPDATE ".$db_table_prefix."Users
 				SET Email = '".$email."'
@@ -79,48 +77,9 @@ updateSessionObj();
 		return ($db->sql_query($sql));
 	}
 
-	public function updateFirstName($firstname){
-		global $pdo_db,$db_table_prefix;
-		$updateFirstName = $pdo_db->prepare("UPDATE ".$db_table_prefix."Users SET First_Name = :firstname WHERE User_ID = :userid");
-		$updateFirstName->bindParam(':firstname', $firstname);
-		$updateFirstName->bindParam(':userid', $this->user_id);
-		$updateFirstName->execute();	
-
-		$this->first_name = $firstname;
-		if($this->remember_me == 1) {
-			updateSessionObj();
-		}
-	}
-
-	public function updateLastName($lastname){
-		global $pdo_db,$db_table_prefix;
-		$updateLastName = $pdo_db->prepare("UPDATE ".$db_table_prefix."Users SET Last_Name = :lastname WHERE User_ID = :userid");
-		$updateLastName->bindParam(':lastname', $lastname);
-		$updateLastName->bindParam(':userid', $this->user_id);
-		$updateLastName->execute();	
-
-		$this->last_name = $lastname;
-		if($this->remember_me == 1) {
-			updateSessionObj();
-		}
-	}
-
-	public function updatePhone($phone){
-		global $pdo_db,$db_table_prefix;
-		$updatePhone = $pdo_db->prepare("UPDATE ".$db_table_prefix."Users SET Phone = :phone WHERE User_ID = :userid");
-		$updatePhone->bindParam(':phone', $phone);
-		$updatePhone->bindParam(':userid', $this->user_id);
-		$updatePhone->execute();	
-
-		$this->phone = $phone;
-		if($this->remember_me == 1) {
-			updateSessionObj();
-		}
-	}
 	
 	//Fetch all user group information
-	public function groupID()
-	{
+	public function groupID(){
 		global $db,$db_table_prefix;
 		
 		$sql = "SELECT ".$db_table_prefix."Users.Group_ID, 
@@ -159,9 +118,8 @@ updateSessionObj();
 	}
 	
 	//Logout
-	function userLogOut()
-	{
-		destorySession("Template");
+	function userLogOut(){
+		destorySession("rl");
 	}
 
 }

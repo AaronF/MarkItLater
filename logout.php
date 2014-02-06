@@ -3,6 +3,10 @@
 	
 	if(isUserLoggedIn()) $loggedInUser->userLogOut();
 
+	if(!isset($_COOKIE["reading_list"])){
+		setcookie("reading_list", $_COOKIE["reading_list"], 1);
+	}
+
 	if(!empty($websiteUrl)) {
 		$add_http = "";
 		

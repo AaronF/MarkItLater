@@ -1,4 +1,7 @@
-<?php require_once("models/config.php");?>
+<?php 
+require_once("models/config.php");
+if(!isUserLoggedIn()) { header("Location: login.php"); die(); }
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,8 +30,11 @@
 			<div class="add">
 				<form id="add_form">
 					<input type="url" name="link" placeholder="Link" id="input_link">
-					<input type="submit" name="add_submit" id="add_submit" value="Add">
+					<input type="submit" name="add_submit" id="add_submit" value="Add" class="hide">
 				</form>
+				<div id="add_loader">
+
+				</div>
 			</div>
 			<ul id="list_items">
 				<script>
@@ -43,6 +49,8 @@
 </div>
 <script>
 $("#add_form").on("submit", function(){
+	$("#add_loader").html("<i class='icon-spinner icon-spin'></i>");
+	$('#input_link').prop('disabled', true);
 	var link = $("#input_link").val();
 	var data = "link="+link+"&user_key=<? echo $loggedInUser->user_key;?>";
 	$.ajax({
@@ -50,6 +58,8 @@ $("#add_form").on("submit", function(){
 		url: "forms/add.php",
 		data: data,
 		success: function(msg){
+			$("#add_loader").html('');
+			$('#input_link').prop('disabled', false);
 			$("#input_link").val("");
 			$("#input_link").focus();
 			$("#list_items").load( "get/list.php", function() {});
@@ -58,16 +68,17 @@ $("#add_form").on("submit", function(){
 	return false;
 });
 
-
 function deleteItem(id){
 	var alert=confirm("Are you sure?");
 	if (alert==true){
+		$("#add_loader").html("<i class='icon-spinner icon-spin'></i>");
 		var data = "id="+id+"&user_key=<? echo $loggedInUser->user_key;?>";
 		$.ajax({
 			type: "POST",
 			url: "forms/delete.php",
 			data: data,
 			success: function(msg){
+				$("#add_loader").html('');
 				$("#list_items").load( "get/list.php", function() {});
 			}
 		});
