@@ -16,7 +16,8 @@ if(!isUserLoggedIn()) { header("Location: login.php"); die(); }
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/external/font-awesome.css">
 
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/rl.js"></script>
     
     <title><?php echo $websiteName;?> - Home</title>
 </head>
@@ -48,26 +49,6 @@ if(!isUserLoggedIn()) { header("Location: login.php"); die(); }
 	</div>
 </div>
 <script>
-$("#add_form").on("submit", function(){
-	$("#add_loader").html("<i class='icon-spinner icon-spin'></i>");
-	$('#input_link').prop('disabled', true);
-	var link = $("#input_link").val();
-	var data = "link="+link+"&user_key=<? echo $loggedInUser->user_key;?>";
-	$.ajax({
-		type: "POST",
-		url: "forms/add.php",
-		data: data,
-		success: function(msg){
-			$("#add_loader").html('');
-			$('#input_link').prop('disabled', false);
-			$("#input_link").val("");
-			$("#input_link").focus();
-			$("#list_items").load( "get/list.php", function() {});
-		}
-	});
-	return false;
-});
-
 function deleteItem(id){
 	var alert=confirm("Are you sure?");
 	if (alert==true){

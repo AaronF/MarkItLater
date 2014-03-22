@@ -12,11 +12,10 @@
 	<meta name="keywords" content="">
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
 
-    <link rel="stylesheet" href="css/external/gridiculous.css">
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/external/font-awesome.css">
 
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     
     <title><?php echo $websiteName;?> - Index</title>
 </head>

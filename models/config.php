@@ -5,6 +5,19 @@
 	ini_set('display_errors', '0');
 	error_reporting(E_ALL | E_STRICT);
 
+	if($_SERVER["HTTP_HOST"]=="localhost"){
+		if($live_db == true){
+			$db_host = "185.23.116.183";
+			$websiteName = "[Remote] Mark It Later";
+			$db_pass = "67/L]UBVW/+A3f]WGxLV";
+		} else {
+			$db_host = "localhost";
+			$websiteName = "[Local] Mark It Later";
+		}
+	}
+	if($_SERVER["HHTP_HOST"]!="localhost"){
+		$db_pass = "67/L]UBVW/+A3f]WGxLV";
+	}
 
 	$db = new $sql_db();
 	if(is_array($db->sql_connect(
@@ -20,7 +33,7 @@
 	}
 	
 	try {
-	    $pdo_db = new PDO("mysql:host=localhost;dbname=$db_name", $db_user, $db_pass);  
+	    $pdo_db = new PDO("mysql:host=".$db_host.";dbname=$db_name", $db_user, $db_pass);  
 	} catch (PDOException $e) {
 	    print "Error!: " . $e->getMessage() . "<br/>";
 	    die();
@@ -35,6 +48,7 @@
 	require_once("funcs.general.php");
 	require_once("class.newuser.php");
 	require_once("class.data.php");
+	require_once("class.add.php");
 
 	session_start();
 	

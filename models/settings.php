@@ -7,6 +7,8 @@
 	$db_port = "";
 	$db_table_prefix = "Member_";
 
+	$live_db = true;
+
 	$langauge = "en";
 	
 	$websiteName = "Reading List";
