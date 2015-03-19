@@ -5,7 +5,7 @@ if(isset($_POST)){
 		$item_title = getTitle($_POST["link"]);
 		$user_id = getIDfromKey($_POST["user_key"]);
 		$Data = new Data;
-		$Data->insertData("Reading_List", '', array("User_ID"=>$loggedInUser->user_id,"Item_Title"=>$item_title, "Item_Link"=>$_POST["link"], "Date_Time"=>now()));
+		$Data->insertData("Reading_List", '', array("User_ID"=>$loggedInUser->user_id,"Item_Title"=>$item_title, "Item_Link"=>$_POST["link"], "Date_Time"=>time()));
 	}
 }
 ?>
